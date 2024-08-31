@@ -1,7 +1,7 @@
 version: "2"
 services:
     main:
-        hostname: jenkins-main
+        hostname: jenkins-main01
         build:
             context: .
             dockerfile: Dockerfile.main
@@ -12,8 +12,8 @@ services:
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock    
     
-    worker1:
-        hostname: jenkins-worker1
+    worker01:
+        hostname: jenkins-worker01
         build:
             context: .
             dockerfile: Dockerfile.deb.worker
@@ -25,8 +25,8 @@ services:
             SSH_USERPASS: jenkins
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock    
-    worker2:
-        hostname: jenkins-worker2
+    worker02:
+        hostname: jenkins-worker02
         build:
             context: .
             dockerfile: Dockerfile.rpm.worker
