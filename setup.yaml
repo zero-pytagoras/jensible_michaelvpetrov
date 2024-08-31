@@ -1,0 +1,27 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    host_type: "{{ host_type }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+    ssh_key: "{{ ssh_key }}"
+    packages: "{{ packages.split(',') }}"
+    config_files: "{{ config_files.split(',') | map('split', ':') | list }}"
+
+  tasks:
+    - name: Install packages
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ packages }}"
+
+    - name: Copy configuration files
+      copy:
+        src: "{{ item[0] }}"
+        dest: "{{ item[1] }}"
+      loop: "{{ config_files }}"
+
+
+
+
